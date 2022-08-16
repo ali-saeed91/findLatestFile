@@ -16,6 +16,6 @@ jobs:
         # Runs a set of commands using the runners shell
         - name: Run a multi-line script
           run: |
-            file=$(ls -t *.txt | tail -n 1)
+            file=$(ls -Art *.txt | head -n1)
             echo "$file"
 
