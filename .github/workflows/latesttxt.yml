@@ -13,9 +13,20 @@ jobs:
         - name: Checkout the code
           uses: actions/checkout@v3
 
-        # Runs a set of commands using the runners shell
-        - name: Run a multi-line script
-          run: |
-            file=$(ls -Art *.txt | head -n1)
-            echo "$file"
+        # # Runs a set of commands using the runners shell
+        # - name: Run a multi-line script
+        #   run: |
+        #     file=$(ls -Art *.txt | head -n1)
+        #     echo "$file"
+        - name: Verify Changed files
+                uses: tj-actions/verify-changed-files@v10.1
+                id: verify-changed-files
+                with:
+                  files: |
+                    *.txt
 
+              - name: Run step only when files change.
+                if: steps.verify-changed-files.outputs.files_changed == 'true'
+                run: |
+                  echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+                # Outputs: "Changed files: new.txt test_directory/new.txt"
