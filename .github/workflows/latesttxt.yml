@@ -44,7 +44,11 @@ jobs:
           echo "$newFile" > File.txt
           value=$(<File.txt)
           echo "$value"
-       
+       - name: Update File
+         run: |
+          echo "$newFile" > File.txt
+          value=$(<File.txt)
+          echo "$value"
 # name: push-develop
 # on: [push]
 # jobs:
