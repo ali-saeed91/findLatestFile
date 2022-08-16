@@ -44,7 +44,8 @@ jobs:
           echo "$TEMP"
           newFile=$(sed -E 's|.*(test)|\1|'<<<"$TEMP")
           echo "$newFile" > File.txt
-          cat File.txt
+          value=$(<File.txt)
+          echo "$value"
        
 # name: push-develop
 # on: [push]
