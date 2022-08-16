@@ -31,14 +31,9 @@ jobs:
           fileOutput: ''
       - name: test
         run: |
-          cat $HOME/files.txt
           cat $HOME/files_modified.txt
-          cat $HOME/files_added.txt
-          cat $HOME/files_removed.txt
-          echo '${{ steps.file_changes.outputs.files}}'
           echo '${{ steps.file_changes.outputs.files_modified}}'
-          echo '${{ steps.file_changes.outputs.files_added}}'
-          echo '${{ steps.file_changes.outputs.files_removed}}'       
+                 
 # name: push-develop
 # on: [push]
 # jobs:
