@@ -1,32 +1,38 @@
-name: Find Latest Text File
-# Controls when the workflow will run
-on:
-  push:
-    branches: [ "main" ]
+# name: Find Latest Text File
+# # Controls when the workflow will run
+# on:
+#   push:
+#     branches: [ "main" ]
+# jobs:
+#   deploy:
+#       name: Find the latest File
+#       runs-on: ubuntu-latest
+#       # Steps represent a sequence of tasks that will be executed as part of the job
+#       steps:
+#         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#         - name: Checkout the code
+#           uses: actions/checkout@v3
+
+#         # Runs a set of commands using the runners shell
+#         - name: Run a multi-line script
+#           run: |
+#             file=$(ls -Art *.txt | head -n1)
+#             echo "$file"
+name: push-develop
+on: [push]
 jobs:
-  deploy:
-      name: Find the latest File
-      runs-on: ubuntu-latest
-      # Steps represent a sequence of tasks that will be executed as part of the job
-      steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - name: Checkout the code
-          uses: actions/checkout@v3
-
-        # # Runs a set of commands using the runners shell
-        # - name: Run a multi-line script
-        #   run: |
-        #     file=$(ls -Art *.txt | head -n1)
-        #     echo "$file"
-        - name: Verify Changed files
-          uses: tj-actions/verify-changed-files@v10.1
-          id: verify-changed-files
-          with:
-            files: |
-                *.txt
-
-        - name: Run step only when files change.
-          if: steps.verify-changed-files.outputs.files_changed == 'true'
-          run: |
-            echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
-          # Outputs: "Changed files: new.txt test_directory/new.txt"
+  changes:
+    runs-on: ubuntu-latest
+    steps:
+      - id: file_changes
+        uses: trilom/file-changes-action@v1.2.3
+      - name: test
+        run: |
+          cat $HOME/files.json
+          cat $HOME/files_modified.json
+          cat $HOME/files_added.json
+          cat $HOME/files_removed.json
+          echo '${{ steps.file_changes.outputs.files}}'
+          echo '${{ steps.file_changes.outputs.files_modified}}'
+          echo '${{ steps.file_changes.outputs.files_added}}'
+          echo '${{ steps.file_changes.outputs.files_removed}}'       
