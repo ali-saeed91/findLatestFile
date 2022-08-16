@@ -31,10 +31,10 @@ jobs:
           fileOutput: ''
       - name: test
         run: |
-          cat $HOME/files.csv
-          cat $HOME/files_modified.json
-          cat $HOME/files_added.json
-          cat $HOME/files_removed.json
+          cat $HOME/files.txt
+          cat $HOME/files_modified.txt
+          cat $HOME/files_added.txt
+          cat $HOME/files_removed.txt
           echo '${{ steps.file_changes.outputs.files}}'
           echo '${{ steps.file_changes.outputs.files_modified}}'
           echo '${{ steps.file_changes.outputs.files_added}}'
