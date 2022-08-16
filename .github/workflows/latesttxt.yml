@@ -40,8 +40,10 @@ jobs:
           echo '${{ steps.file_changes.outputs.files_added}}'
           echo '${{ steps.file_changes.outputs.files_removed}}' > tmp.txt
           TEMP=$(grep -hnr "#" tmp.txt)
+          echo "$TEMP"
           ISSUENO=${TEMP#*#}
-          printf -v ISSUENO '%s' $ISSUENO
+          echo "$ISSUENO"
+          # printf -v ISSUENO '%s' $ISSUENO
           # TEMP='${{ steps.file_changes.outputs.files_modified}}'
           # echo "$TEMP"       
 # name: push-develop
