@@ -31,7 +31,7 @@ jobs:
           fileOutput: ''
       - name: test
         run: |
-          cat $HOME/files.json
+          cat $HOME/files.csv
           cat $HOME/files_modified.json
           cat $HOME/files_added.json
           cat $HOME/files_removed.json
