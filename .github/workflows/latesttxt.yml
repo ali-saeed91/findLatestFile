@@ -42,10 +42,11 @@ jobs:
           
           TEMP='${{ steps.file_changes.outputs.files_modified}}'
           newFile=$(sed -E 's|.*(test)|\1|'<<<"$TEMP")
-          echo "$newFile" > File.txt
-          value=$(<File.txt)
-          echo "$value"
-       
+          echo "$newFile" 
+
+          echo "$newFile" > new.txt
+          var=$(<new.txt)
+          echo "$var" 
 # name: push-develop
 # on: [push]
 # jobs:
