@@ -26,27 +26,26 @@ jobs:
     steps:
       - id: file_changes
         uses: trilom/file-changes-action@v1.2.3
-        
+        with:
+          output: 'json'
+          fileOutput: 'json'
       - name: test
         run: |
           cat $HOME/files.json
           cat $HOME/files_modified.json
-          
+          cat $HOME/files_added.json
+          cat $HOME/files_removed.json
           echo '${{ steps.file_changes.outputs.files}}'
           echo '${{ steps.file_changes.outputs.files_modified}}'
-          
+          echo '${{ steps.file_changes.outputs.files_added}}'
+          echo '${{ steps.file_changes.outputs.files_removed}}'
           
           TEMP='${{ steps.file_changes.outputs.files_modified}}'
-          echo "$TEMP"
           newFile=$(sed -E 's|.*(test)|\1|'<<<"$TEMP")
           echo "$newFile" > File.txt
           value=$(<File.txt)
           echo "$value"
-      - name: Update File
-        run: echo "$newFile" > File.txt && value=$(<File.txt) && echo "$value"
-          
-          
-          
+       
 # name: push-develop
 # on: [push]
 # jobs:
